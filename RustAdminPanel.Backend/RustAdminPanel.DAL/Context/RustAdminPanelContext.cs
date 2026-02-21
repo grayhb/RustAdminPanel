@@ -7,10 +7,12 @@ namespace RustAdminPanel.DAL.Context
     {
         public RustAdminPanelContext(DbContextOptions<RustAdminPanelContext> options) : base(options)
         {
-            Database.EnsureCreated();
+
         }
 
         public DbSet<PlayerConnectionLog> PlayerConnectionLogs { get; set; }
+
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
     }
 }

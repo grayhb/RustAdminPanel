@@ -12,5 +12,7 @@ namespace RustAdminPanel.Domain.Entities
         public string ConnectionIp { get; set; }
 
         public long ConnectionTimestamp { get; set; }
+
+        public DateTime ConnectionDateTime { get; set; }
     }
 }
