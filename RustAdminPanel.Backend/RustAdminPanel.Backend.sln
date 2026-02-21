@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RustAdminPanel.API", "RustAdminPanel.API\RustAdminPanel.API.csproj", "{05B8A84C-D578-4379-8C46-948ED4C1A034}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4AC927FB-4935-4AA8-AAB9-4A0D9FDAC2B0} = {4AC927FB-4935-4AA8-AAB9-4A0D9FDAC2B0}
+		{CB077CBD-3BAD-4EB7-AFA0-6B47A1161100} = {CB077CBD-3BAD-4EB7-AFA0-6B47A1161100}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RustAdminPanel.Domain", "RustAdminPanel.Domain\RustAdminPanel.Domain.csproj", "{CB077CBD-3BAD-4EB7-AFA0-6B47A1161100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RustAdminPanel.DAL", "RustAdminPanel.DAL\RustAdminPanel.DAL.csproj", "{4AC927FB-4935-4AA8-AAB9-4A0D9FDAC2B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CB077CBD-3BAD-4EB7-AFA0-6B47A1161100} = {CB077CBD-3BAD-4EB7-AFA0-6B47A1161100}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF89ABE0-50D3-4CC9-ACA9-071B887FC160}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RustAdminPanel.Services", "RustAdminPanel.Services\RustAdminPanel.Services.csproj", "{004A9122-6201-49AF-A15D-83107C521C6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05B8A84C-D578-4379-8C46-948ED4C1A034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05B8A84C-D578-4379-8C46-948ED4C1A034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05B8A84C-D578-4379-8C46-948ED4C1A034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05B8A84C-D578-4379-8C46-948ED4C1A034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB077CBD-3BAD-4EB7-AFA0-6B47A1161100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB077CBD-3BAD-4EB7-AFA0-6B47A1161100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB077CBD-3BAD-4EB7-AFA0-6B47A1161100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB077CBD-3BAD-4EB7-AFA0-6B47A1161100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC927FB-4935-4AA8-AAB9-4A0D9FDAC2B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC927FB-4935-4AA8-AAB9-4A0D9FDAC2B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC927FB-4935-4AA8-AAB9-4A0D9FDAC2B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC927FB-4935-4AA8-AAB9-4A0D9FDAC2B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{004A9122-6201-49AF-A15D-83107C521C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{004A9122-6201-49AF-A15D-83107C521C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{004A9122-6201-49AF-A15D-83107C521C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{004A9122-6201-49AF-A15D-83107C521C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
