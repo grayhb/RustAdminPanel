@@ -38,7 +38,7 @@ namespace RustAdminPanel.Services.PlayerConnections
 
             if (!string.IsNullOrEmpty(query.SteamName))
             {
-                dbQuery = dbQuery.Where(e => e.SteamName.ToLower() == query.SteamName.ToLower().Trim());
+                dbQuery = dbQuery.Where(e => e.SteamName.ToLower().IndexOf(query.SteamName.ToLower()) > -1);
             }
 
             if (!string.IsNullOrEmpty(query.SteamId))
@@ -64,7 +64,9 @@ namespace RustAdminPanel.Services.PlayerConnections
                 }
             }
 
-            return await dbQuery.ToListAsync();
+            return await dbQuery
+                .OrderByDescending(e => e.ConnectionTimestamp)
+                .ToListAsync();
         }
     }
 }

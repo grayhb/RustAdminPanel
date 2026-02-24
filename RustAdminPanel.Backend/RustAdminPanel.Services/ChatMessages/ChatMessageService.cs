@@ -40,7 +40,7 @@ namespace RustAdminPanel.Services.ChatMessages
 
             if (!string.IsNullOrEmpty(query.SteamName))
             {
-                dbQuery = dbQuery.Where(e => e.SteamName.ToLower() == query.SteamName.ToLower().Trim());
+                dbQuery = dbQuery.Where(e => e.SteamName.ToLower().IndexOf(query.SteamName.ToLower()) > -1);
             }
 
             if (!string.IsNullOrEmpty(query.SteamId))
@@ -72,7 +72,9 @@ namespace RustAdminPanel.Services.ChatMessages
                 dbQuery = dbQuery.Where(e => e.Message.ToLower().Contains(query.MessageSearch.ToLower()));
             }
 
-            return await dbQuery.ToListAsync();
+            return await dbQuery
+                .OrderByDescending(e => e.MessageDateTime)
+                .ToListAsync();
         }
     }
 }
