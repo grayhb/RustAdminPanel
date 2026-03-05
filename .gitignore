@@ -389,3 +389,4 @@ FodyWeavers.xsd
 /data.db
 /data.db-shm
 /data.db-wal
+/RustAdminPanel.Backend/RustAdminPanel.API/appsettings.Development.json
