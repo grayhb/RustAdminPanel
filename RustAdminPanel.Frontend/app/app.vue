@@ -5,8 +5,6 @@
 </template>
 
 <script setup>
-import { checkApiKey } from "./services";
-
 useHead({
   htmlAttrs: {
     lang: "ru",
@@ -18,8 +16,8 @@ useHead({
   link: [],
 });
 
-const checkToken = async () => {
-  if (!(await checkApiKey())) {
+const checkAuth = async () => {
+  if (!(await useAuthStore().checkAuth())) {
     navigateTo("/auth");
   }
 };
@@ -27,6 +25,6 @@ const checkToken = async () => {
 if (!useToken().hasToken()) {
   navigateTo("/auth");
 } else {
-  checkToken();
+  checkAuth();
 }
 </script>

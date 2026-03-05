@@ -13,15 +13,21 @@
 </template>
 
 <script lang="ts" setup>
-import { checkApiKey } from "~/services/auth";
-
 const apiKey = ref("");
+
+const authed = computed(() => useAuthStore().authed);
 
 const onSubmit = async () => {
   if (!apiKey.value) return;
 
-  if (await checkApiKey(apiKey.value)) navigateTo("/");
+  await useAuthStore().checkAuth(apiKey.value);
 };
+
+watch(authed, (value: boolean) => {
+  if (value) {
+    location.replace("/");
+  }
+});
 </script>
 
 <style>

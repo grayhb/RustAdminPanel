@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app v-if="authed" id="inspire">
     <v-app-bar class="px-3" density="compact" flat>
       <v-avatar
         class="hidden-md-and-up"
@@ -41,6 +41,8 @@
 const links = ["Player Connections", "Chat"];
 
 const tabModel = ref(0);
+
+const authed = computed(() => useAuthStore().authed);
 </script>
 
 <style scoped>

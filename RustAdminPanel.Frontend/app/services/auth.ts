@@ -1,6 +1,8 @@
 import { useAPI } from "~/composables";
 
-export const checkApiKey = async (apiKey: string | undefined | null) => {
+export const checkApiKey = async (
+  apiKey: string | undefined | null = undefined,
+) => {
   if (!apiKey) {
     apiKey = useToken().get();
   }
@@ -17,9 +19,4 @@ export const checkApiKey = async (apiKey: string | undefined | null) => {
   });
 
   return result;
-
-  //   if (status.value !== "success") {
-  //     useToken().set(undefined);
-  //     return false;
-  //   } else return true;
 };
