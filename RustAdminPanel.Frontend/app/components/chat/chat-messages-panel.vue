@@ -6,39 +6,64 @@
         v-model="dateRangeVariant"
         :items="dateRangeVariants"
         variant="solo-filled"
+        density="comfortable"
         hide-details
         @update:model-value="fetchData"
         :disabled="loading"
+        :item-props="compactDensityProps"
+      ></v-combobox>
+
+      <v-combobox
+        label="Канал"
+        v-model="channelVariant"
+        :items="channelVariants"
+        variant="solo-filled"
+        density="comfortable"
+        hide-details
+        class="mt-4"
+        item-value="id"
+        item-title="title"
+        :return-object="false"
+        clearable
+        @update:model-value="fetchData"
+        :disabled="loading"
+        :item-props="compactDensityProps"
       ></v-combobox>
 
       <v-text-field
         label="Steam Id"
         v-model="steamId"
         variant="solo-filled"
+        density="comfortable"
         hide-details
         :disabled="loading"
         class="mt-4"
         clearable
+        @keydown.enter="fetchData"
       ></v-text-field>
 
       <v-text-field
         label="Steam Name"
         v-model="steamName"
         variant="solo-filled"
+        density="comfortable"
         hide-details
         :disabled="loading"
         class="mt-4"
         clearable
+        @keydown.enter="fetchData"
       ></v-text-field>
 
       <v-text-field
         label="Search"
         v-model="searchValue"
         variant="solo-filled"
+        density="comfortable"
         hide-details
         :disabled="loading"
         class="mt-4"
         clearable
+        @keydown.enter="fetchData"
       ></v-text-field>
 
       <v-btn
@@ -63,6 +88,11 @@ import type { ChatMessageQuery } from "~/types/chat.types";
 
 const dateRangeVariants = [ON_DAY, ON_WEEK, ON_MONTH, ON_YEAR];
 
+interface ChannelVariant {
+  id: number;
+  title: string;
+}
+
 const dateRangeVariant = ref(dateRangeVariants[0]);
 const steamId = ref<undefined | string>();
 const steamName = ref<undefined | string>();
@@ -70,6 +100,13 @@ const searchValue = ref<undefined | string>();
 
 const loading = computed(() => useChatStore().loading);
 const entites = computed(() => useChatStore().entites);
+
+const channelVariants: ChannelVariant[] = [
+  { id: 0, title: "GLOBAL" },
+  { id: 1, title: "TEAM" },
+];
+
+const channelVariant = ref(0);
 
 const getQuery = () => {
   const result = {} as ChatMessageQuery;
@@ -95,12 +132,20 @@ const getQuery = () => {
 
   if (steamId.value) result.steamId = steamId.value;
   if (steamName.value) result.steamName = steamName.value;
+  if (channelVariant.value !== undefined) result.channel = channelVariant.value;
+  if (searchValue.value !== undefined) result.messageSearch = searchValue.value;
 
   return result;
 };
 
 const fetchData = async () => {
   await useChatStore().fetchData(getQuery());
+};
+
+const compactDensityProps = () => {
+  return {
+    density: "compact",
+  };
 };
 
 onMounted(() => {

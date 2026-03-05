@@ -12,4 +12,5 @@ export interface ChatMessageQuery {
   steamId?: string;
   steamName?: string;
   messageSearch?: string;
+  channel?: number;
 }

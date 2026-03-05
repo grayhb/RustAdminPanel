@@ -11,5 +11,7 @@
         public string? SteamName { get; set; }
 
         public string? MessageSearch { get; set; }
+
+        public long? Channel { get; set; }
     }
 }

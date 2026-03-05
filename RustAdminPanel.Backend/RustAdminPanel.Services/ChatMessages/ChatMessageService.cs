@@ -72,6 +72,12 @@ namespace RustAdminPanel.Services.ChatMessages
                 dbQuery = dbQuery.Where(e => e.Message.ToLower().Contains(query.MessageSearch.ToLower()));
             }
 
+            if (query.Channel != null)
+            {
+                // поиск по выбранному каналу (GLOBAL/TEAM)
+                dbQuery = dbQuery.Where(e => e.Channel == query.Channel);
+            }
+
             return await dbQuery
                 .OrderByDescending(e => e.MessageDateTime)
                 .ToListAsync();

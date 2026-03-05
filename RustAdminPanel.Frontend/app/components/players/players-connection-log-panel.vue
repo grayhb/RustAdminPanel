@@ -6,6 +6,7 @@
         v-model="dateRangeVariant"
         :items="dateRangeVariants"
         variant="solo-filled"
+        density="comfortable"
         hide-details
         @update:model-value="fetchData"
         :disabled="loading"
@@ -15,20 +16,24 @@
         label="Steam Id"
         v-model="steamId"
         variant="solo-filled"
+        density="comfortable"
         hide-details
         :disabled="loading"
         class="mt-4"
         clearable
+        @keydown.enter="fetchData"
       ></v-text-field>
 
       <v-text-field
         label="Steam Name"
         v-model="steamName"
         variant="solo-filled"
+        density="comfortable"
         hide-details
         :disabled="loading"
         class="mt-4"
         clearable
+        @keydown.enter="fetchData"
       ></v-text-field>
 
       <v-btn
