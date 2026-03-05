@@ -1,24 +1,52 @@
 import type {
   PlayerConnectionLog,
   PlayerConnectionQuery,
+  PlayerProfile,
+  PlayerProfileQuery,
 } from "~/types/player.types";
 
 export const usePlayersStore = defineStore("players", {
   state: () => ({
-    loading: false,
-    entites: [] as PlayerConnectionLog[],
+    connectionLogsLoading: false,
+    connectionLogs: [] as PlayerConnectionLog[],
+
+    profilesLoading: false,
+    profiles: [] as PlayerProfile[],
+
+    createProfilesFromLogsLoading: false,
+    refreshSteamDataLoading: false,
   }),
   getters: {},
   actions: {
-    async fetchData(query: PlayerConnectionQuery) {
-      this.loading = true;
-      this.entites = [];
+    async fetchConnectionLogs(query: PlayerConnectionQuery) {
+      this.connectionLogsLoading = true;
+      this.connectionLogs = [];
 
       const data = await useAPI("/get-data/player-connection", "POST", query);
 
-      this.loading = false;
+      this.connectionLogsLoading = false;
 
-      if (data) this.entites = data as PlayerConnectionLog[];
+      if (data) this.connectionLogs = data as PlayerConnectionLog[];
+    },
+    async fetchProfiles(query: PlayerProfileQuery) {
+      this.profilesLoading = true;
+      this.profiles = [];
+
+      const data = await useAPI("/player-profiles/list", "POST", query);
+
+      this.profilesLoading = false;
+
+      if (data) this.profiles = data as PlayerProfile[];
+    },
+    async createProfilesFromLogs() {
+      this.createProfilesFromLogsLoading = true;
+      await useAPI("/player-profiles/create-profiles-from-logs", "POST");
+      this.createProfilesFromLogsLoading = false;
+    },
+    async refreshSteamData() {
+      this.refreshSteamDataLoading = true;
+      await useAPI("/player-profiles/refresh-data-from-steam", "POST");
+      this.refreshSteamDataLoading = false;
     },
   },
 });

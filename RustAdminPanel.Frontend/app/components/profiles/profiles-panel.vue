@@ -54,19 +54,19 @@
 import { addDays, addMonths, addYears, formatISO } from "date-fns";
 
 import { ON_WEEK, ON_MONTH, ON_YEAR, ON_DAY } from "~/constants";
-import type { PlayerConnectionQuery } from "~/types/player.types";
+import type { PlayerProfileQuery } from "~/types/player.types";
 
 const dateRangeVariants = [ON_DAY, ON_WEEK, ON_MONTH, ON_YEAR];
 
-const dateRangeVariant = ref(dateRangeVariants[0]);
+const dateRangeVariant = ref(dateRangeVariants[1]);
 const steamId = ref<undefined | string>();
 const steamName = ref<undefined | string>();
 
-const loading = computed(() => usePlayersStore().connectionLogsLoading);
-const entites = computed(() => usePlayersStore().connectionLogs);
+const loading = computed(() => usePlayersStore().profilesLoading);
+const entites = computed(() => usePlayersStore().profiles);
 
 const getQuery = () => {
-  const result = {} as PlayerConnectionQuery;
+  const result = {} as PlayerProfileQuery;
 
   switch (dateRangeVariant.value) {
     case ON_DAY:
@@ -94,7 +94,7 @@ const getQuery = () => {
 };
 
 const fetchData = async () => {
-  await usePlayersStore().fetchConnectionLogs(getQuery());
+  await usePlayersStore().fetchProfiles(getQuery());
 };
 
 onMounted(() => {

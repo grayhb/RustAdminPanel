@@ -14,5 +14,7 @@ namespace RustAdminPanel.DAL.Context
 
         public DbSet<ChatMessage> ChatMessages { get; set; }
 
+        public DbSet<PlayerProfile> PlayerProfiles { get; set; }
+
     }
 }

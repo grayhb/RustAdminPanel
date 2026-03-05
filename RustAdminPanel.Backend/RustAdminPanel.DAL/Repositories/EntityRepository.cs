@@ -15,6 +15,8 @@ namespace RustAdminPanel.DAL.Repositories
 
         Task UpdateAsync(T entity);
 
+        Task UpdateAsync(List<T> entities);
+
         Task DeleteAsync(T entity);
 
         IQueryable<T> GetQueryable();
@@ -66,6 +68,16 @@ namespace RustAdminPanel.DAL.Repositories
         public async Task UpdateAsync(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(List<T> entities)
+        {
+            foreach(var entity in entities)
+            {
+                _context.Entry(entity).State = EntityState.Modified;
+            }
+
             await _context.SaveChangesAsync();
         }
     }

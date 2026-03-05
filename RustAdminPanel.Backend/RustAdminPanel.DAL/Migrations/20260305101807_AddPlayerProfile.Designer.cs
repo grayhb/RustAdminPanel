@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RustAdminPanel.DAL.Context;
 
@@ -10,9 +11,11 @@ using RustAdminPanel.DAL.Context;
 namespace RustAdminPanel.DAL.Migrations
 {
     [DbContext(typeof(RustAdminPanelContext))]
-    partial class RustAdminPanelContextModelSnapshot : ModelSnapshot
+    [Migration("20260305101807_AddPlayerProfile")]
+    partial class AddPlayerProfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.24");
@@ -86,9 +89,6 @@ namespace RustAdminPanel.DAL.Migrations
 
                     b.Property<string>("Avatar")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("LastServerConnectionAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Note")

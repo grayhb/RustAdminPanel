@@ -45,8 +45,8 @@ import { format } from "date-fns";
 
 const virtualScroll = ref();
 
-const items = computed(() => usePlayersStore().entites);
-const loading = computed(() => usePlayersStore().loading);
+const items = computed(() => usePlayersStore().connectionLogs);
+const loading = computed(() => usePlayersStore().connectionLogsLoading);
 
 const virtualScrollHeight = ref(600);
 

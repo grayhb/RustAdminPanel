@@ -20,15 +20,17 @@
         <v-row class="h-100">
           <v-col cols="12" md="3">
             <v-sheet rounded="lg" class="py-2 px-2">
-              <players-connection-log-panel v-if="tabModel === 0" />
-              <chat-messages-panel v-if="tabModel === 1" />
+              <profiles-panel v-if="tabModel === 0" />
+              <players-connection-log-panel v-if="tabModel === 1" />
+              <chat-messages-panel v-if="tabModel === 2" />
             </v-sheet>
           </v-col>
 
           <v-col cols="12" md="9" class="h-100">
             <v-sheet id="body-container" rounded="lg" class="py-2 px-2 h-100">
-              <players-connection-log v-if="tabModel === 0" />
-              <chat-messages v-if="tabModel === 1" />
+              <profiles v-if="tabModel === 0" />
+              <players-connection-log v-if="tabModel === 1" />
+              <chat-messages v-if="tabModel === 2" />
             </v-sheet>
           </v-col>
         </v-row>
@@ -38,7 +40,7 @@
 </template>
 
 <script setup>
-const links = ["Player Connections", "Chat"];
+const links = ["Profiles", "Player Connections", "Chat"];
 
 const tabModel = ref(0);
 
