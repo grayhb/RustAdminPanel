@@ -9,6 +9,7 @@ using RustAdminPanel.Services.PlayerConnections;
 var builder = WebApplication.CreateBuilder(args);
 
 var dbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var corsUrls = builder.Configuration["CorsUrls"] ?? "http://localhost:3000";
 
 // Add services to the container.
 
@@ -38,7 +39,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(RustAdminPanelCors,
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000")
+            policy.WithOrigins(corsUrls)
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
