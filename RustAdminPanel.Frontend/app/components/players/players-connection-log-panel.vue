@@ -36,6 +36,18 @@
         @keydown.enter="fetchData"
       ></v-text-field>
 
+      <v-text-field
+        label="IP"
+        v-model="ip"
+        variant="solo-filled"
+        density="comfortable"
+        hide-details
+        :disabled="loading"
+        class="mt-4"
+        clearable
+        @keydown.enter="fetchData"
+      ></v-text-field>
+
       <v-btn
         variant="flat"
         color="primary"
@@ -61,6 +73,7 @@ const dateRangeVariants = [ON_DAY, ON_WEEK, ON_MONTH, ON_YEAR];
 const dateRangeVariant = ref(dateRangeVariants[0]);
 const steamId = ref<undefined | string>();
 const steamName = ref<undefined | string>();
+const ip = ref<undefined | string>();
 
 const loading = computed(() => usePlayersStore().connectionLogsLoading);
 const entites = computed(() => usePlayersStore().connectionLogs);
@@ -89,6 +102,7 @@ const getQuery = () => {
 
   if (steamId.value) result.steamId = steamId.value;
   if (steamName.value) result.steamName = steamName.value;
+  if (ip.value) result.ip = ip.value;
 
   return result;
 };

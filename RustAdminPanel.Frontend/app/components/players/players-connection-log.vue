@@ -16,7 +16,7 @@
   >
     <template v-slot:default="{ item }">
       <v-list-item
-        :subtitle="`Steam ID: ${item.steamId}`"
+        :subtitle="`Steam ID: ${item.steamId}, IP: ${item.connectionIp}`"
         :title="item.steamName"
       >
         <template v-slot:prepend>
@@ -67,6 +67,10 @@ const onWindowResize = () => {
     }
   }
 };
+
+watch(items, () => {
+  onWindowResize();
+});
 
 onMounted(() => {
   addEventListener("resize", onWindowResize);

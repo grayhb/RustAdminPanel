@@ -57,6 +57,17 @@
         <template v-slot:title>
           <div class="d-flex align-center">
             <div class="profile-persona-name">{{ item.personaName }}</div>
+            <v-btn
+              icon="mdi-pencil"
+              color="primary"
+              title="Изменить примечание"
+              size="x-small"
+              variant="text"
+              density="comfortable"
+              @click="onEditNote(item)"
+              class="ml-2"
+            ></v-btn>
+            <div class="profile-note">{{ item.note }}</div>
           </div>
           <div v-if="item.steamNames.length > 1" class="profile-steam-names">
             <v-chip
@@ -72,21 +83,36 @@
         </template>
 
         <template v-slot:subtitle>
-          <span>Steam ID: {{ item.steamId }}</span>
+          <div class="d-flex align-center">
+            <span>Steam ID: {{ item.steamId }}</span>
+          </div>
         </template>
       </v-list-item>
     </template>
   </v-virtual-scroll>
+  <profile-edit-dialog
+    v-model="isEditDialogOpen"
+    :item="editCurrentItem"
+    @save="onSaveItem"
+  />
 </template>
 
 <script lang="ts" setup>
 import { format } from "date-fns";
 
+import type { PlayerProfile, ProfileUpdateDto } from "~/types/player.types";
+
+import profileEditDialog from "./profile-edit-dialog.vue";
+
 const virtualScroll = ref();
+
+const isEditDialogOpen = ref(false);
+const editCurrentItem = ref<PlayerProfile>();
 
 const items = computed(() => usePlayersStore().profiles);
 
 const loading = computed(() => usePlayersStore().profilesLoading);
+
 const createProfilesFromLogsLoading = computed(
   () => usePlayersStore().createProfilesFromLogsLoading,
 );
@@ -124,6 +150,19 @@ const onRefreshSteamData = async () => {
   await usePlayersStore().refreshSteamData();
 };
 
+const onEditNote = (item: PlayerProfile) => {
+  editCurrentItem.value = item;
+  isEditDialogOpen.value = true;
+};
+
+const onSaveItem = async (dto: ProfileUpdateDto) => {
+  await usePlayersStore().update(dto);
+};
+
+watch(items, () => {
+  onWindowResize();
+});
+
 onMounted(() => {
   addEventListener("resize", onWindowResize);
   setTimeout(() => onWindowResize(), 250);
@@ -148,5 +187,11 @@ onUnmounted(() => {
 .profile-steam-names {
   font-size: 12px;
   line-height: 1;
+}
+
+.profile-note {
+  color: #ff0000;
+  line-height: 1;
+  font-size: 12px;
 }
 </style>

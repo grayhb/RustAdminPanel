@@ -9,5 +9,7 @@
         public string? SteamId { get; set; }
 
         public string? SteamName { get; set; }
+
+        public string? Ip { get; set; }
     }
 }

@@ -57,6 +57,10 @@ const onWindowResize = () => {
   }
 };
 
+watch(items, () => {
+  onWindowResize();
+});
+
 onMounted(() => {
   addEventListener("resize", onWindowResize);
   setTimeout(() => onWindowResize(), 250);

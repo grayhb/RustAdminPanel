@@ -2,7 +2,6 @@
 using RustAdminPanel.DAL.Repositories;
 using RustAdminPanel.Domain.Entities;
 using RustAdminPanel.Services.Steam;
-using System.Diagnostics;
 
 namespace RustAdminPanel.Services.Profiles
 {
@@ -13,6 +12,8 @@ namespace RustAdminPanel.Services.Profiles
         Task CreateProfileAsync(string steamId, string steamName, DateTime connectedAt);
 
         Task RefreshSteamDataAsync();
+
+        Task<PlayerProfile> UpdateAsync(ProfileUpdateDto dto);
     }
 
     public class ProfileService : IProfileService
@@ -32,7 +33,7 @@ namespace RustAdminPanel.Services.Profiles
 
             if (profile == null)
             {
-                await _profileRepository.AddAsync(new PlayerProfile()
+                profile = new PlayerProfile()
                 {
                     SteamId = steamId,
                     PersonaName = steamName,
@@ -41,7 +42,16 @@ namespace RustAdminPanel.Services.Profiles
                     LastServerConnectionAt = connectedAt,
                     Avatar = "https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb.jpg",
                     Note = ""
-                });
+                };
+
+                var steamProfile = await _steamService.GetPlayerSummaryAsync(steamId);
+
+                if (steamProfile != null)
+                {
+                    profile.Avatar = steamProfile.avatar;
+                }
+
+                await _profileRepository.AddAsync(profile);
             }
             else
             {
@@ -51,6 +61,18 @@ namespace RustAdminPanel.Services.Profiles
                 {
                     profile.SteamNames.Add(steamName);
                 }
+
+                if ($"{profile.UpdatedAt:dd.MM.yyyy}" != $"{DateTime.Now:dd.MM.yyyy}")
+                {
+                    var steamProfile = await _steamService.GetPlayerSummaryAsync(steamId);
+
+                    if (steamProfile != null)
+                    {
+                        profile.Avatar = steamProfile.avatar;
+                    }
+                }
+
+                profile.UpdatedAt = DateTime.Now;
 
                 await _profileRepository.UpdateAsync(profile);
             }
@@ -112,6 +134,20 @@ namespace RustAdminPanel.Services.Profiles
             }
 
             await _profileRepository.UpdateAsync(items);
+        }
+
+        public async Task<PlayerProfile> UpdateAsync(ProfileUpdateDto dto)
+        {
+            var existItem = await _profileRepository.GetByIdAsync(dto.Id);
+
+            if (existItem == null)
+                throw new Exception("Запись не найдена");
+
+            existItem.Note = dto.Note;
+
+            await _profileRepository.UpdateAsync(existItem);
+
+            return existItem;
         }
     }
 }

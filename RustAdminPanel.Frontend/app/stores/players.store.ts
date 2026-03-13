@@ -3,6 +3,7 @@ import type {
   PlayerConnectionQuery,
   PlayerProfile,
   PlayerProfileQuery,
+  ProfileUpdateDto,
 } from "~/types/player.types";
 
 export const usePlayersStore = defineStore("players", {
@@ -47,6 +48,21 @@ export const usePlayersStore = defineStore("players", {
       this.refreshSteamDataLoading = true;
       await useAPI("/player-profiles/refresh-data-from-steam", "POST");
       this.refreshSteamDataLoading = false;
+    },
+    async update(dto: ProfileUpdateDto) {
+      try {
+        const data = await useAPI("/player-profiles/update", "PUT", dto);
+
+        if (!data) return;
+
+        const profile = this.profiles.find((e) => e.id === dto.id);
+
+        if (profile) {
+          profile.note = (data as PlayerProfile).note;
+        }
+      } catch {
+        console.error("Ошибка сохранения данных");
+      }
     },
   },
 });

@@ -64,6 +64,11 @@ namespace RustAdminPanel.Services.PlayerConnections
         {
             var dbQuery = _playerConnectionLogRepository.GetQueryable();
 
+            if (!string.IsNullOrEmpty(query.Ip))
+            {
+                dbQuery = dbQuery.Where(e => e.ConnectionIp == query.Ip);
+            }
+
             if (!string.IsNullOrEmpty(query.SteamName))
             {
                 dbQuery = dbQuery.Where(e => e.SteamName.ToLower().IndexOf(query.SteamName.ToLower()) > -1);

@@ -11,6 +11,7 @@ export interface PlayerConnectionQuery {
   to?: string;
   steamId?: string;
   steamName?: string;
+  ip?: string;
 }
 
 export interface PlayerProfile {
@@ -29,4 +30,9 @@ export interface PlayerProfileQuery {
   to?: string;
   steamId?: string;
   steamName?: string;
+}
+
+export interface ProfileUpdateDto {
+  id: string;
+  note: string;
 }

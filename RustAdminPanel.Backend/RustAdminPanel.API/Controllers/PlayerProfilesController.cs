@@ -33,7 +33,6 @@ namespace RustAdminPanel.API.Controllers
             }
         }
 
-
         [HttpPost("refresh-data-from-steam")]
         public async Task<ActionResult> RefreshDataFromSteam()
         {
@@ -48,7 +47,6 @@ namespace RustAdminPanel.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
         [HttpPost("create-profiles-from-logs")]
         public async Task<ActionResult> CreateProfilesFromLogs()
@@ -65,6 +63,17 @@ namespace RustAdminPanel.API.Controllers
             }
         }
 
-
+        [HttpPut("update")]
+        public async Task<ActionResult<PlayerProfile>> UpdateItem([FromBody] ProfileUpdateDto dto)
+        {
+            try
+            {
+                return await _profileService.UpdateAsync(dto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
