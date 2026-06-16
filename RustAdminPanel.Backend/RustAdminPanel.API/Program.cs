@@ -5,6 +5,7 @@ using RustAdminPanel.DAL.Repositories;
 using RustAdminPanel.Domain.Entities;
 using RustAdminPanel.Services.ChatMessages;
 using RustAdminPanel.Services.PlayerConnections;
+using RustAdminPanel.Services.PlayerReports;
 using RustAdminPanel.Services.Profiles;
 using RustAdminPanel.Services.Steam;
 
@@ -25,12 +26,14 @@ builder.Services.AddDbContext<RustAdminPanelContext>(options => options.UseSqlit
 builder.Services.AddScoped<IEntityRepository<PlayerConnectionLog>, EntityRepository<PlayerConnectionLog>>();
 builder.Services.AddScoped<IEntityRepository<ChatMessage>, EntityRepository<ChatMessage>>();
 builder.Services.AddScoped<IEntityRepository<PlayerProfile>, EntityRepository<PlayerProfile>>();
+builder.Services.AddScoped<IEntityRepository<PlayerReport>, EntityRepository<PlayerReport>>();
 
 // Services
 builder.Services.AddScoped<IPlayerConnectionsService, PlayerConnectionsService>();
 builder.Services.AddScoped<IChatMessageService, ChatMessageService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<ISteamService, SteamService>();
+builder.Services.AddScoped<IPlayerReportsService, PlayerReportsService>();
 
 // API-KEY
 builder.Services.AddSingleton<ApiKeyAuthorizationFilter>();

@@ -23,6 +23,7 @@
               <profiles-panel v-if="tabModel === 0" />
               <players-connection-log-panel v-if="tabModel === 1" />
               <chat-messages-panel v-if="tabModel === 2" />
+              <player-reports-panel v-if="tabModel === 3" />
             </v-sheet>
           </v-col>
 
@@ -31,6 +32,7 @@
               <profiles v-if="tabModel === 0" />
               <players-connection-log v-if="tabModel === 1" />
               <chat-messages v-if="tabModel === 2" />
+              <player-reports v-if="tabModel === 3" />
             </v-sheet>
           </v-col>
         </v-row>
@@ -40,7 +42,7 @@
 </template>
 
 <script setup>
-const links = ["Profiles", "Player Connections", "Chat"];
+const links = ["Профили", "Соединения", "Чат", "Репорты"];
 
 const tabModel = ref(0);
 

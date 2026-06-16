@@ -16,5 +16,7 @@ namespace RustAdminPanel.DAL.Context
 
         public DbSet<PlayerProfile> PlayerProfiles { get; set; }
 
+        public DbSet<PlayerReport> PlayerReports { get; set; }
+
     }
 }
