@@ -8,6 +8,9 @@ export interface PlayerReport {
   data: string;
   createdAt: string;
 
+  playerId: string;
+  playerName: string;
+
   dataParsed?: PlayerReportData;
 }
 

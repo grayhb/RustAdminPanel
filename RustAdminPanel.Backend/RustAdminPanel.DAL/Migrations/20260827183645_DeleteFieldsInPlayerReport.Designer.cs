@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RustAdminPanel.DAL.Context;
 
@@ -10,9 +11,11 @@ using RustAdminPanel.DAL.Context;
 namespace RustAdminPanel.DAL.Migrations
 {
     [DbContext(typeof(RustAdminPanelContext))]
-    partial class RustAdminPanelContextModelSnapshot : ModelSnapshot
+    [Migration("20260827183645_DeleteFieldsInPlayerReport")]
+    partial class DeleteFieldsInPlayerReport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.24");

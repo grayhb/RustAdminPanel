@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RustAdminPanel.DAL.Context;
 
@@ -10,9 +11,11 @@ using RustAdminPanel.DAL.Context;
 namespace RustAdminPanel.DAL.Migrations
 {
     [DbContext(typeof(RustAdminPanelContext))]
-    partial class RustAdminPanelContextModelSnapshot : ModelSnapshot
+    [Migration("20260629204251_AddFieldsInPlayerReport")]
+    partial class AddFieldsInPlayerReport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.24");
@@ -128,7 +131,31 @@ namespace RustAdminPanel.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("PlayerId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TargetId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TargetName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

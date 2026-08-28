@@ -2,7 +2,7 @@ const getBaseUrl = () => {
   if (location.origin.indexOf("localhost") > -1)
     return "http://localhost:5284/";
 
-  return "http://rust-admin-panel.shadroff.ru/api/";
+  return location.origin + "/api/";
 };
 
 export function useAPI(

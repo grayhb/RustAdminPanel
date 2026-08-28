@@ -18,7 +18,7 @@ namespace RustAdminPanel.API.Controllers
         }
 
         [HttpPost("list")]
-        public async Task<ActionResult<List<PlayerReport>>> GetPlayerProfiles([FromBody] PlayerReportQuery playerReportQuery)
+        public async Task<ActionResult<List<ReportRdo>>> GetPlayerProfiles([FromBody] PlayerReportQuery playerReportQuery)
         {
             try
             {

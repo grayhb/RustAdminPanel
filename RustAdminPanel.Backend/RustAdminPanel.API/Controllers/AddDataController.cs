@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using RustAdminPanel.API.ApiKey;
+﻿using Microsoft.AspNetCore.Mvc;
 using RustAdminPanel.Services.ChatMessages;
 using RustAdminPanel.Services.PlayerConnections;
 using RustAdminPanel.Services.PlayerReports;
@@ -62,14 +60,37 @@ namespace RustAdminPanel.API.Controllers
             }
         }
 
-        [HttpPost("player-report"), AllowAnonymous]
-        public async Task<ActionResult> AddPlayerReport([FromBody] PlayerReportDto dto)
+        //[HttpPost("report")]
+        //public async Task<ActionResult> AddPlayerReport([FromBody] PlayerReportDto dto)
+        //{
+        //    try
+        //    {
+        //        await _playerReportsService.AddAsync(dto);
+
+        //        return Ok("Player report saved");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (ex.InnerException != null)
+        //        {
+        //            return BadRequest($"Inner Exception: {ex.InnerException.Message}");
+        //        }
+
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        [HttpPost("server-report")]
+        public async Task<ActionResult> AddServerReport(
+            [FromForm] string data,
+            [FromForm] string userid
+        )
         {
             try
             {
-                await _playerReportsService.AddAsync(dto);
+                await _playerReportsService.AddFromServerAsync(new ReportDto() { data = data, userid = userid});
 
-                return Ok("Player report saved");
+                return Ok("Report saved");
             }
             catch (Exception ex)
             {

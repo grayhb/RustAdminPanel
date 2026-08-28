@@ -23,7 +23,7 @@
           {{ getDateTime(item.time) }}
         </span>
         <span class="steam-name">
-          {{ item.steamName }}
+          {{ item.steamName }} ({{item.steamId}})
         </span>
         <span class="chat-message">
           {{ item.message }}

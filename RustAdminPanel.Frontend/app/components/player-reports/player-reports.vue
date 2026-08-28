@@ -30,11 +30,11 @@
             <div class="user-container">
               <div
                 class="steam-name"
-                @click="onOpenSteamProfile(item.dataParsed.AppInfo.UserId)"
+                @click="onOpenSteamProfile(item.playerId)"
               >
-                {{ item.dataParsed.AppInfo.UserName }}
+                {{ item.playerName }}
               </div>
-              <div class="steam-id">{{ item.dataParsed.AppInfo.UserId }}</div>
+              <div class="steam-id">{{ item.playerId }}</div>
             </div>
             <v-icon color="error" class="mx-4">mdi-arrow-right-thick</v-icon>
             <div class="user-container">

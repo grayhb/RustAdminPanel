@@ -56,7 +56,9 @@
 
         <template v-slot:title>
           <div class="d-flex align-center">
-            <div class="profile-persona-name">{{ item.personaName }}</div>
+            <div class="profile-persona-name">
+              {{ steamActualSteamName(item) }}
+            </div>
             <v-btn
               icon="mdi-pencil"
               color="primary"
@@ -121,6 +123,10 @@ const refreshSteamDataLoading = computed(
 );
 
 const virtualScrollHeight = ref(600);
+
+const steamActualSteamName = (item: PlayerProfile) => {
+  return item.steamNames[item.steamNames.length - 1];
+};
 
 const getDateTime = (value: string) => {
   return format(value, "dd.MM.yyyy HH:mm:ss");
